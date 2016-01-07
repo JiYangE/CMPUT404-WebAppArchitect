@@ -12,5 +12,5 @@ print response.headers['content-type']
 
 print response.encoding
 
-# print response.text
+print response.text
 
