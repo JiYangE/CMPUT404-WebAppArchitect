@@ -1,9 +1,11 @@
 #  coding: utf-8 
 
 import SocketServer
+import os 
 from error import ErrorHandler
 
-# Copyright 2013 Abram Hindle, Eddie Antonio Santos， Ji Yang
+
+# Copyright 2013 Abram Hindle, Eddie Antonio Santos Ji Yang
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -54,23 +56,13 @@ from error import ErrorHandler
 #   - [ ] Provide a screenshot (commit and push it!) of Firefox at
 #     http://127.0.0.1:8080/ and http://127.0.0.1:8080/deep
 
-import os 
-
 # The following response content(HTTP_CODE) is from https://hg.python.org/cpython/file/2.7/Lib/BaseHTTPServer.py
 HTTP_CODE = {
     200: ('OK', 'Request fulfilled, document follows'),
     301: ('Moved Permanently', 'Object moved permanently -- see URI list'),
     302: ('Found', 'Object moved temporarily -- see URI list'),
-    400: ('Bad Request', 'Bad request syntax or unsupported method'),
     404: ('Not Found', 'Nothing matches the given URI'),
-    405: ('Method Not Allowed', 'Specified method is invalid for this resource.'),
-    500: ('Internal Server Error', 'Server got itself in trouble'),
-    501: ('Not Implemented', 'Server does not support this operation'),
-    505: ('HTTP Version Not Supported', 'Cannot fulfill request.'),
 }
-TEMPLATE_PATH = "www"
-METHOD_SUPPORTED = ['GET']
-HTTP_VERSION_SUPPORTED = ['HTTP/1.1']
 MIME_TYPE = {
     "CSS": "text/css",
     "HTML": "text/html"
@@ -96,9 +88,9 @@ class MyWebServer(SocketServer.BaseRequestHandler):
         except ErrorHandler as error:
             self.handle_error(error)
     
-    def abs_path(self, target_file, filename):
+    def abs_path(self, target_file, path):
         if not target_file[-1] == ('/'):
-            self.deal_response(filename + '/')
+            self.redirect(path + '/')
         else:
             pass
     
@@ -108,15 +100,6 @@ class MyWebServer(SocketServer.BaseRequestHandler):
         # expect "GET / HTTP/1.1" in args
         req_method, root_dir, protocal_version = head_line.split(" ")
         # handle exceptions
-        if len(head_line.split(" ")) != 3:
-            print "Retrive failed"
-            raise ErrorHandler(400)
-        if req_method not in METHOD_SUPPORTED:
-            print "Not a supported request method"
-            raise ErrorHandler(505)
-        if protocal_version not in HTTP_VERSION_SUPPORTED:
-            print "Not a supported HTTP version"
-            raise ErrorHandler(405)
         return req_method.lower(), root_dir
 
     # GET method
@@ -126,7 +109,7 @@ class MyWebServer(SocketServer.BaseRequestHandler):
         # DESTINATION = /Users/YJ/Documents/CMPUT404-assignment-webserver/www/index.html
         # ABSOLUTEPATH = /Users/YJ/Documents/CMPUT404-assignment-webserver/www/index.html
         # print "\n==================\nGetting %s\n" % filename
-        root_path = os.path.abspath(TEMPLATE_PATH)
+        root_path = os.path.abspath("www")
         # print "ROOT_PATH = " + root_path
         target_file = root_path + filename
         # print "DESTINATION = " + target_file
@@ -134,8 +117,9 @@ class MyWebServer(SocketServer.BaseRequestHandler):
         # print "ABSOLUTEPATH = " + absolute_path
         
         # check whether the abs_path is what we want 
+        # handle 404 error (not found)
         if not absolute_path.startswith(root_path):
-            print "ABSOLUTE_PATH error"
+            # print "ABSOLUTE_PATH error"
             raise ErrorHandler(404)
         if os.path.isdir(absolute_path):
             self.abs_path(target_file, filename)
@@ -149,25 +133,27 @@ class MyWebServer(SocketServer.BaseRequestHandler):
         # load HTML page then retrieve
         page_content = open(absolute_path).read()
         self.deal_response(200, mime_type, page_content)
-            
-    def deal_response(self, filename):
-        response = "HTTP/1.1 %d %s\n" % (301, "Good!")
-        response += "Location: %s\n" % filename
+        
+    # https://en.wikipedia.org/wiki/HTTP_301        
+    def redirect(self, filename):
+        response = "HTTP/1.1 %d %s\r\n" % (301, "Good!")
+        response += "Location: %s\r\n\r\n" % filename
         # print response
         self.request.sendall(response)
         
+    # https://en.wikipedia.org/wiki/HTTP_301    
     def deal_response(self, code, mime_type, content=''):
         response = "HTTP/1.1 %d %s \n" % (code, HTTP_CODE[code][0])
-        response += "Content-Length: %d\n" % len(content)
-        response += "Content-Type: %s\n" % mime_type
-        response += "Connection: close\n"
-        response += content + "\n"
+        response += "Content-Length: %d \r\n" % len(content)
+        response += "Content-Type: %s \r\n" % mime_type
+        response += "Connection: close \r\n\r\n"
+        response += content + "\r\n"
         # print response
         self.request.sendall(response)
         
     def handle_error(self, error):
         # Send error
-        self.deal_response(error.status_code, MIME_TYPE['HTML'], error.template())
+        self.deal_response(error.status_code, MIME_TYPE['HTML'], error.TEMPLATE)
 
             
 if __name__ == "__main__":
