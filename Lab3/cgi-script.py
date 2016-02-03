@@ -4,19 +4,14 @@ from __future__ import print_function
 
 import sys, os, cgi
 
-print("Blah!", file=sys.stderr)
-'''
-print("Content-type: text/text")
-print("")
-print("Hello, this is the CGI script!")
-print("I am process %i" % os.getpid())
-'''
+
 print("Content-type: text/html")
 print("")
-print("<HTML><BODY><FORM method='POST'><INPUT name='x'></FORM></BODY></HTML>")
+print("<html><body><form method='post'><input name='x'></form></body></html>")
 
 # print(os.environ)
 print("")
 
 form = cgi.FieldStorage()
-print(form.getvalue('x'))
+# Escaping HTML
+print(cgi.escape(form.getvalue('x')))

@@ -1,9 +1,9 @@
 Operation:
 
 In Terminal:
-chmod +x cgi-program.py
+chmod +x cgi-script.py
 python cgi-server.py
 
 In Firefox:
-http://localhost:8000/cgi-program.py
-http://localhost:8000/cgi-program.py?x=hello
+http://localhost:8000/cgi-script.py
+http://localhost:8000/cgi-script.py?x=hello
