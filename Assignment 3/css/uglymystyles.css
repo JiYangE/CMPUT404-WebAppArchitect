@@ -1,0 +1,151 @@
+.row-header {
+    margin: 0px auto;
+    padding: 0px 0px;
+}
+
+.row-content {
+    margin: 0px auto;
+    padding: 50px 0px;
+    border-bottom: 1px ridge;
+    min-height: 400px;
+}
+
+.row-footer {
+    margin: 0px auto;
+    padding: 20px 0px;
+    background-color: #AfAfAf;
+    background: orange;
+}
+
+.jumbotron {
+    margin: 0px auto;
+    padding: 70px 30px;
+    background-color: orange;
+    color: black;
+}
+
+
+h1,h2,h3 {
+    text-align: center;
+}
+
+.mysidebar {
+    padding-top: 85px;
+}
+
+.carousel {
+    background: yellow;
+}
+
+.carousel .item {
+    height: 300px;
+}
+
+.carousel .item img {
+    left: 0;
+    min-height: 300px;
+    position: absolute;
+    top: 0;
+}
+
+.greybg {
+    background: lightgray
+}
+
+.profile-img {
+    height: 130px;
+    width: 130px;
+}
+
+.navbar-inverse {
+    background: yellow;
+    color: black;
+}
+
+.navbar-inverse .navbar-nav > .active > a {
+    background: blue;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > .active > a:hover {
+    background: #002;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > .active > a:focus {
+    background: #002;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > .open > a {
+    background: #002;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > .open > a:hover {
+    background: #002;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav > .open > a:focus {
+    background: #002;
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    background-color: #002;
+    color: #eeeeee;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
+    color: #000000;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu {
+    background-color: #002;
+    color: #eeeeee;
+}
+
+address {
+    color: #fff;
+    font-size: 120%;
+    margin: 0px;
+}
+
+body {
+    align: center;
+    padding: 50px 0px 0px 0px;
+    z-index: 0;
+    background: lightgray;
+}
+
+.tab-content {
+    border-bottom: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    padding: 10px;
+}
+
+.affix {
+    top: 120px;
+}
+
+#carouselButtons {
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+}
+
+.img-responsive {
+    height: 220px;
+    width: 220px;
+}
+
+.panel-body {
+    background: blue;
+    color: wheat
+}
+
+.uglynav {
+    background: yellow;
+}

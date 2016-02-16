@@ -1,0 +1,88 @@
+body {
+    background: url('../img/old-paper-texture.jpg');
+    background-size: 120% 100%;
+    padding-top: 100px;
+    font-family: Georgia, serif;
+    text-align: justify;
+    font-size: 175%;
+}
+
+.top-pre {
+    background: url('../img/note2.jpg');
+    background-size: 100% 20%;
+    background-repeat: repeat;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table,
+td,
+th {
+    border: 1px solid black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-align: center;
+    margin-left: 12%;
+    margin-right: 12%
+}
+
+div {
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+}
+
+p {
+    text-indent: 3em;
+    padding-top: 5px;
+}
+
+a {
+    color: darkblue;
+}
+
+a:visited {
+    color: purple;
+    text-decoration: none
+}
+
+a:hover {
+    color: rebeccapurple;
+    text-decoration: underline, bold;
+}
+
+a:active {
+    color: #0000FF;
+}
+
+div .img {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+.bot-pre {
+    background: url('../img/note2.jpg');
+    background-size: 100% 2.5%;
+    background-repeat: repeat;
+    text-align: center;
+}
+
+cate {
+    align-self: stretch;
+    text-indent: 2em;
+}
+
+.titlepage {
+ text-align: center   
+}
